@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:grain_manager/pages/about.dart';
+import 'package:grain_manager/pages/devices.dart';
+import 'package:grain_manager/pages/guide.dart';
+import 'package:grain_manager/pages/support.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final currentRoute = ModalRoute.of(context)!.settings.name;
     return ListView(
       children: [
         DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,6 +27,7 @@ class AppDrawer extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 35.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.green,
                 ),
               )
             ],
@@ -34,7 +37,12 @@ class AppDrawer extends StatelessWidget {
           leading: Icon(Icons.devices),
           title: Text("Devices"),
           onTap: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            if (currentRoute != Devices.route) {
+              Navigator.pushReplacementNamed(context, Devices.route);
+            } else {
+              Navigator.pop(context);
+            }
           },
         ),
         Divider(),
@@ -42,7 +50,11 @@ class AppDrawer extends StatelessWidget {
           leading: Icon(Icons.book),
           title: Text("Guide"),
           onTap: () {
-            Navigator.pop(context);
+            if (currentRoute != GuidePage.route) {
+              Navigator.pushReplacementNamed(context, GuidePage.route);
+            } else {
+              Navigator.pop(context);
+            }
           },
         ),
         Divider(),
@@ -50,7 +62,12 @@ class AppDrawer extends StatelessWidget {
           leading: Icon(Icons.support),
           title: Text("Support"),
           onTap: () {
-            Navigator.pop(context);
+            // ModalRoute.of(context)!.settings.name;
+            if (currentRoute != SupportPage.route) {
+              Navigator.pushReplacementNamed(context, SupportPage.route);
+            } else {
+              Navigator.pop(context);
+            }
           },
         ),
         Divider(),
@@ -58,7 +75,11 @@ class AppDrawer extends StatelessWidget {
           leading: Icon(Icons.info),
           title: Text("About"),
           onTap: () {
-            Navigator.pop(context);
+            if (currentRoute != AboutPage.route) {
+              Navigator.pushReplacementNamed(context, AboutPage.route);
+            } else {
+              Navigator.pop(context);
+            }
           },
         ),
         Divider(),

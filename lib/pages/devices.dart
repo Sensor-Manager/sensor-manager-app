@@ -3,6 +3,7 @@ import 'package:grain_manager/components/app_drawer.dart';
 import 'package:grain_manager/components/device_button.dart';
 
 class Devices extends StatefulWidget {
+  static const route = "/";
   Devices({Key? key}) : super(key: key);
 
   @override
@@ -10,14 +11,6 @@ class Devices extends StatefulWidget {
 }
 
 class _DevicesState extends State<Devices> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +43,8 @@ class _DevicesState extends State<Devices> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () {},
+        tooltip: 'Add Device',
         child: Icon(Icons.add),
       ),
     );

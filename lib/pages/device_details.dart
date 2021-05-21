@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grain_manager/models/device_data.dart';
 
 class DeviceDetails extends StatefulWidget {
-  final String name;
-  DeviceDetails({required this.name});
+  static const route = "/deviceDetails";
+
   @override
   _DeviceDetailsState createState() => _DeviceDetailsState();
 }
@@ -16,9 +17,10 @@ class _DeviceDetailsState extends State<DeviceDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as DeviceData;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        title: Text(args.title),
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20.0),
