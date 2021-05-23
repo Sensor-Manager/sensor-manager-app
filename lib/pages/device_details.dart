@@ -1,26 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:grain_manager/models/device_data.dart';
+import 'package:grain_manager/api/device_response.dart';
 
-class DeviceDetails extends StatefulWidget {
+class DeviceDetails extends StatelessWidget {
   static const route = "/deviceDetails";
 
-  @override
-  _DeviceDetailsState createState() => _DeviceDetailsState();
-}
+  String getReview(DevicesResponse arg) {
+    // print(int.parse(arg.temperature.substring(0, arg.temperature.length - 2)));
+    int temp =
+        int.parse(arg.temperature.substring(0, arg.temperature.length - 2));
 
-class _DeviceDetailsState extends State<DeviceDetails> {
-  String temperature = "30℃";
-  String humidity = "84%";
-
-  String review =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
+    int humi = int.parse(arg.humidity.substring(0, arg.humidity.length - 1));
+    if (arg.name == "Rice") {
+      if (temp < 21 || temp > 42 || humi < 60 || humi > 80) {
+        return """→ Is the place where rice is stored a humid or moist place?
+→ Is the level of moisture not dried upto 14%?.
+→ Were the grains stored directly on the floor?
+→ Was it stored in a close and compact manner?
+→ Were the containers reused without cleaning or treatment for hiding insects or pathogens?
+→ Was it stored in airtight containers?
+""";
+      }
+    } else if (arg.name == "Wheat") {
+      if (temp < 3 || temp > 32 || humi < 18 || humi > 20) {
+        return """→ Are all the structures airtight including the loading and unloading ports?
+→ Is the warehouse not plastered with an impervious clay layer to protect attack from termite and other rodents?
+→ Was rodent proof material not used while construction of the warehouses?
+→ Is the ground where the wheat was stored elevated and away from moisture?
+→ Is more grain stored than the allowed amount?
+""";
+      }
+    } else if (arg.name == "Barley") {
+      if (temp < 18 || temp > 24 || humi < 70 || humi > 80) {
+        return """→ Is the moisture content greater than 12% as this could result in acetic type fermentation?
+→ Is the temperature of the warehouse more than 30%?
+→ Is the construction not well-ventilated and lacks a proper drainage system in case of rains?
+→ Is Barley stored over height of 4-5 meters?
+→ Was the store house vacuum cleaned before storing?
+""";
+      }
+    }
+    return "Every thing is good";
+  }
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as DeviceData;
+    final args = ModalRoute.of(context)!.settings.arguments as DevicesResponse;
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.title),
+        title: Text(args.name),
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20.0),
@@ -34,14 +61,14 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                 child: Column(
                   children: [
                     Text(
-                      "Temperature : $temperature",
+                      "Temperature : ${args.temperature}",
                       style: TextStyle(fontSize: 23.0),
                     ),
                     SizedBox(
                       height: 20.0,
                     ),
                     Text(
-                      "Humidity : $humidity",
+                      "Humidity : ${args.humidity}",
                       style: TextStyle(fontSize: 23.0),
                     ),
                   ],
@@ -55,7 +82,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                 child: Container(
                   padding: EdgeInsetsDirectional.all(20.0),
                   child: Text(
-                    review,
+                    getReview(args),
                     style: TextStyle(fontSize: 16.0),
                   ),
                 ),
