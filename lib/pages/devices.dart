@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class Devices extends StatefulWidget {
-  static const route = "/";
+  static const route = "/devices";
   Devices({Key? key}) : super(key: key);
 
   @override

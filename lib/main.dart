@@ -3,6 +3,8 @@ import 'package:grain_manager/pages/about.dart';
 import 'package:grain_manager/pages/device_details.dart';
 import 'package:grain_manager/pages/devices.dart';
 import 'package:grain_manager/pages/guide.dart';
+import 'package:grain_manager/pages/login.dart';
+import 'package:grain_manager/pages/splash_screen.dart';
 import 'package:grain_manager/pages/support.dart';
 
 void main() {
@@ -17,10 +19,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        iconTheme: IconThemeData(color: Colors.green),
       ),
-      initialRoute: Devices.route,
+      initialRoute: SplashScreen.route,
       routes: {
+        SplashScreen.route: (context) => SplashScreen(),
+        LoginScreen.route: (context) => LoginScreen(),
         Devices.route: (context) => Devices(),
         DeviceDetails.route: (context) => DeviceDetails(),
         GuidePage.route: (context) => GuidePage(),
