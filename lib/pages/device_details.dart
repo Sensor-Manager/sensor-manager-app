@@ -6,12 +6,11 @@ class DeviceDetails extends StatelessWidget {
 
   String getReview(DevicesResponse arg) {
     // print(int.parse(arg.temperature.substring(0, arg.temperature.length - 2)));
-    int temp =
-        int.parse(arg.temperature.substring(0, arg.temperature.length - 2));
+    double temp = double.parse(arg.temperature);
 
-    int humi = int.parse(arg.humidity.substring(0, arg.humidity.length - 1));
+    double humi = double.parse(arg.humidity);
     if (arg.name == "Rice") {
-      if (temp < 21 || temp > 42 || humi < 60 || humi > 80) {
+      if (temp < 21 || temp > 42 || humi < 50 || humi > 80) {
         return """→ Is the place where rice is stored a humid or moist place?
 → Is the level of moisture not dried upto 14%?.
 → Were the grains stored directly on the floor?
@@ -39,7 +38,7 @@ class DeviceDetails extends StatelessWidget {
 """;
       }
     }
-    return "Every thing is good";
+    return "Every thing is good and the grains are safe";
   }
 
   @override
@@ -61,14 +60,14 @@ class DeviceDetails extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Temperature : ${args.temperature}",
+                      "Temperature : ${args.temperature} °C",
                       style: TextStyle(fontSize: 23.0),
                     ),
                     SizedBox(
                       height: 20.0,
                     ),
                     Text(
-                      "Humidity : ${args.humidity}",
+                      "Humidity : ${args.humidity} %",
                       style: TextStyle(fontSize: 23.0),
                     ),
                   ],
